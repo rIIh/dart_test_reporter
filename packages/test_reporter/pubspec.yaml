@@ -1,0 +1,25 @@
+name: test_reporter
+description: CLI Utility to wrap dart tests with reporter plugins
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.4.1
+
+# Add regular dependencies here.
+dependencies:
+  very_good_test_runner: ^0.2.0
+  path: ^1.8.0
+  uuid: ^4.4.0
+  freezed_annotation: ^2.4.1
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
+
+  # codegen
+  build_runner: ^2.4.11
+  freezed: ^2.5.3
+
+executables:
+  with_reporter:

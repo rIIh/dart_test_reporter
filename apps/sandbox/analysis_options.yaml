@@ -1,0 +1,16 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    always_declare_return_types: warning
+
+linter:
+  rules:
+    always_declare_return_types: true
+    always_use_package_imports: true
+    cancel_subscriptions: true
+    close_sinks: true
+    test_types_in_equals: true
+    throw_in_finally: true
+    unnecessary_statements: true
+    unnecessary_breaks: true

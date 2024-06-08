@@ -1,0 +1,38 @@
+name: test_reporter_sandbox
+description: "Test Reporter Sandbox App"
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ">=3.4.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # cli
+  very_good_test_runner: ^0.2.0
+
+  # packages
+  widgetbook:
+    git:
+      url: https://github.com/rIIh/widgetbook.git
+      ref: experimental
+      path: packages/widgetbook
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  path: ^1.9.0
+  alchemist: ^0.7.0
+  build_runner: ^2.4.10
+  flutter_lints: ^3.0.0
+  widgetbook_generator:
+    git:
+      url: https://github.com/rIIh/widgetbook.git
+      ref: experimental
+      path: packages/widgetbook_generator
+
+flutter:
+  uses-material-design: true

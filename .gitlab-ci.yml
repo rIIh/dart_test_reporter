@@ -1,0 +1,13 @@
+---
+
+test:
+  stage: test
+  script:
+    - melos bs
+    - melos generate
+    - melos test
+  after_script:
+    - mkdir allure-results
+    - find **/allure-results/* -exec cp '{}' ./allure-results/ \;
+    - zip -r allure-results.zip allure-results/
+    - allures --host $ALLURE_SERVER report --upload allure-results.zip --path $CI_COMMIT_REF_SLUG

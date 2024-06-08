@@ -1,0 +1,87 @@
+import 'package:allure_server_cli/src/args.dart';
+import 'package:allure_server_cli/src/logger.dart';
+import 'package:allure_server_cli/src/report_command.dart';
+import 'package:allure_server_cli/src/upload_command.dart';
+import 'package:args/args.dart';
+import 'package:dio/dio.dart';
+
+// TODO(@melvspace): 06/09/24 from package info
+const String version = '1.0.0';
+
+void printUsage(ArgParser argParser) {
+  print('Usage: dart allure_server_cli.dart <flags> [arguments]');
+  print(argParser.usage);
+  print('');
+
+  print('Available commands');
+  final commands = argParser.commands.entries
+      .map((e) => '${e.key}\n\t${e.value.usage.replaceAll('\n', '\n\t')}')
+      .join('\n\t');
+
+  print('\t$commands');
+}
+
+Future<void> main(List<String> arguments) async {
+  final ArgParser argParser = buildParser();
+
+  try {
+    final ArgResults results = argParser.parse(arguments);
+    logFilter.verbose = results.wasParsed('verbose');
+
+    if (results.wasParsed('version')) {
+      l.i('allure_server_cli version: $version');
+      return;
+    }
+
+    // Process the parsed arguments.
+    if (arguments.isEmpty || results.wasParsed('help')) {
+      printUsage(argParser);
+      return;
+    }
+
+    // Act on the arguments provided.
+    l.i('Positional arguments: ${results.rest}');
+    l.d('All arguments: ${results.arguments}');
+
+    if (!results.wasParsed('host')) {
+      throw FormatException('host was not provided');
+    }
+
+    var host = results.option('host')!;
+    var api = results.option('api')!;
+    l.d({'host': host, 'api': api});
+    if (!host.startsWith(RegExp(r'https?://'))) {
+      host = 'https://$host';
+    }
+
+    final dio = Dio(BaseOptions(baseUrl: '$host$api'));
+    l.d('Dio Client created with host base: ${dio.options.baseUrl}');
+
+    if (results.command case ArgResults command) {
+      switch (command.name) {
+        case 'report':
+          l.i('Sending report to Allure Server: ${command.arguments}');
+
+          await ReportCommand(
+            params: Params(
+              path: command.multiOption('path'),
+              executor: Executor.fromArgs(command),
+              upload: command.multiOption('upload'),
+              results: command.multiOption('results'),
+              deleteResults: command.flag('delete-results'),
+            ),
+          ).execute(dio);
+
+        case 'upload':
+          final file = command.rest.single;
+          l.i('Sending report archive to Allure Server: ${command.arguments}');
+
+          await UploadCommand(file: file).execute(dio);
+      }
+    }
+  } on FormatException catch (e, trace) {
+    l.e(e.message, stackTrace: trace);
+    print('');
+    printUsage(argParser);
+  }
+}
