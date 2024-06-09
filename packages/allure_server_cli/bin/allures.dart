@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 const String version = '1.0.0';
 
 void printUsage(ArgParser argParser) {
-  print('Usage: dart allure_server_cli.dart <flags> [arguments]');
+  print('Usage: allures <flags> [arguments]');
   print(argParser.usage);
   print('');
 
@@ -29,7 +29,7 @@ Future<void> main(List<String> arguments) async {
     logFilter.verbose = results.wasParsed('verbose');
 
     if (results.wasParsed('version')) {
-      l.i('allure_server_cli version: $version');
+      l.i('allures version: $version');
       return;
     }
 
