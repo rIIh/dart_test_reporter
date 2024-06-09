@@ -2,6 +2,8 @@
 
 This repository contains various tools and utilities for generating and deploy reports for Dart applications
 
+[Allure Demo - GH Pages](https://riih.github.io/dart_test_reporter/)
+
 ## Concept
 
 Dart test core packages does not provide a way to inject custom reporting logic when you call `dart test`.
