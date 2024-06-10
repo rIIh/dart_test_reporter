@@ -121,12 +121,10 @@ Future<void> main(List<String> arguments) async {
 MapEntry<String, String>? getAuthorizationFromEnvironment() {
   if (Platform.environment.containsKey('ALLURES_BASIC_AUTH_USER') &&
       Platform.environment.containsKey('ALLURES_BASIC_AUTH_PASSWORD')) {
-    final user = Platform.environment.containsKey(
-      'ALLURES_BASIC_AUTH_USER',
-    );
-    final password = Platform.environment.containsKey(
-      'ALLURES_BASIC_AUTH_PASSWORD',
-    );
+    final user = Platform.environment['ALLURES_BASIC_AUTH_USER'];
+    final password = Platform.environment['ALLURES_BASIC_AUTH_PASSWORD'];
+
+    l.d([user, password]);
 
     return MapEntry(
       "Authorization",

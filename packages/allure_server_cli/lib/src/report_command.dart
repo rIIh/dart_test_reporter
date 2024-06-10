@@ -131,7 +131,9 @@ class ReportCommand {
         },
       );
 
-      return ReportResult.fromJson(response.data);
+      final result = ReportResult.fromJson(response.data);
+      print("Report available at: ${result.url}");
+      return result;
     } on DioException catch (e, s) {
       if (e.response case Response response) {
         l.e(

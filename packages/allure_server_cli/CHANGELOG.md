@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Fix environment parse logic
+
 ## 1.0.1
 
 - Add `--header` option, supporting multiple values in format `KEY=VALUE`
