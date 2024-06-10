@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:allure_server_cli/src/args.dart';
 import 'package:allure_server_cli/src/logger.dart';
 import 'package:allure_server_cli/src/report_command.dart';
@@ -47,14 +50,43 @@ Future<void> main(List<String> arguments) async {
       throw FormatException('host was not provided');
     }
 
+    var headers = results.multiOption('header').map((e) {
+      final match = RegExp('([a-zA-Z]+)="?(.+)"?').firstMatch(e);
+      if (match == null) {
+        throw FormatException(
+          'Invalid Header format - $e. '
+          'Expected Header in format `KEY=VALUE`',
+        );
+      }
+
+      final header = match.group(1)!;
+      final value = match.group(2)!;
+
+      return MapEntry(header, value);
+    });
+
+    l.d('Headers: $headers');
+
     var host = results.option('host')!;
     var api = results.option('api')!;
-    l.d({'host': host, 'api': api});
     if (!host.startsWith(RegExp(r'https?://'))) {
       host = 'https://$host';
     }
 
-    final dio = Dio(BaseOptions(baseUrl: '$host$api'));
+    l.d('Host Options: ${{'host': host, 'api': api}}');
+
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: '$host$api',
+        headers: {
+          if (getAuthorizationFromEnvironment()
+              case MapEntry(:final key, :final value))
+            key: value,
+          ...Map.fromEntries(headers),
+        },
+      ),
+    );
+
     l.d('Dio Client created with host base: ${dio.options.baseUrl}');
 
     if (results.command case ArgResults command) {
@@ -84,4 +116,23 @@ Future<void> main(List<String> arguments) async {
     print('');
     printUsage(argParser);
   }
+}
+
+MapEntry<String, String>? getAuthorizationFromEnvironment() {
+  if (Platform.environment.containsKey('ALLURES_BASIC_AUTH_USER') &&
+      Platform.environment.containsKey('ALLURES_BASIC_AUTH_PASSWORD')) {
+    final user = Platform.environment.containsKey(
+      'ALLURES_BASIC_AUTH_USER',
+    );
+    final password = Platform.environment.containsKey(
+      'ALLURES_BASIC_AUTH_PASSWORD',
+    );
+
+    return MapEntry(
+      "Authorization",
+      "Basic ${base64.encode(utf8.encode('$user:$password'))}",
+    );
+  }
+
+  return null;
 }

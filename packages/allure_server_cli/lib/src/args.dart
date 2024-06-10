@@ -1,5 +1,37 @@
 import 'package:args/args.dart';
 
+ArgParser buildParser() {
+  return ArgParser()
+    ..addOption('host', help: 'Allure Server host', mandatory: true)
+    ..addOption('api', help: 'Allure Server API path', defaultsTo: '/api')
+    ..addMultiOption('header', help: 'Additional request header')
+    ..addFlag(
+      'verbose',
+      abbr: 'v',
+      help: 'Verbose output',
+      defaultsTo: false,
+    )
+    ..addFlag(
+      'help',
+      abbr: 'h',
+      negatable: false,
+      help: 'Print this usage information.',
+    )
+    ..addFlag(
+      'version',
+      negatable: false,
+      help: 'Print the tool version.',
+    )
+    ..addCommand(
+      'report',
+      buildReportParser(),
+    )
+    ..addCommand(
+      'upload',
+      buildUploadParser(),
+    );
+}
+
 ArgParser buildReportParser() {
   return ArgParser() //
     ..addMultiOption(
@@ -60,35 +92,4 @@ ArgParser buildReportParser() {
 
 ArgParser buildUploadParser() {
   return ArgParser();
-}
-
-ArgParser buildParser() {
-  return ArgParser()
-    ..addOption('host', help: 'Allure Server host', mandatory: true)
-    ..addOption('api', help: 'Allure Server API path', defaultsTo: '/api')
-    ..addFlag(
-      'verbose',
-      abbr: 'v',
-      help: 'Verbose output',
-      defaultsTo: false,
-    )
-    ..addFlag(
-      'help',
-      abbr: 'h',
-      negatable: false,
-      help: 'Print this usage information.',
-    )
-    ..addFlag(
-      'version',
-      negatable: false,
-      help: 'Print the tool version.',
-    )
-    ..addCommand(
-      'report',
-      buildReportParser(),
-    )
-    ..addCommand(
-      'upload',
-      buildUploadParser(),
-    );
 }

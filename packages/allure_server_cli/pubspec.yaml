@@ -1,6 +1,6 @@
 name: allure_server_cli
 description: CLI tool for communication with [Allure Server](https://github.com/kochetkov-ma/allure-server)
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/rIIh/dart_test_reporter
 issue_tracker: https://github.com/rIIh/dart_test_reporter/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+%5Ballure_server_cli%5D
 
