@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:very_good_test_runner/very_good_test_runner.dart';
+import 'package:test_reporter/test_reporter.dart';
 
 part 'test_report.freezed.dart';
 

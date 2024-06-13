@@ -5,9 +5,6 @@ packages:
   - packages/**
 
 scripts:
-  reporter:install: |
-    melos exec --scope=test_reporter -- dart pub global activate -s path .
-
   allures:install: |
     melos exec --scope=allure_server_cli -- dart pub global activate -s path .
 
@@ -15,9 +12,9 @@ scripts:
     melos exec --depends-on=build_runner -- dart run build_runner build -d
 
   test: |
-    melos exec --dir-exists test --dir-exists allure_results -- rm -rf allure_results
+    melos exec --dir-exists test --dir-exists allure-results -- rm -rf allure-results
     melos exec --dir-exists test --dir-exists reports -- rm -rf reports
-    melos exec --dir-exists test -- with_reporter flutter test
+    melos exec --dir-exists test --depends-on allure_report -- dart run test_reporter --reporter allure_report -- flutter test
   
   goldens:accept: |
     melos exec --dir-exists test -- flutter test --tags golden --update-goldens

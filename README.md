@@ -10,41 +10,72 @@ Dart test core packages does not provide a way to inject custom reporting logic 
 
 To workaround this problem there is `test_reporter` cli tool which wraps `dart test` process and processes events from it.
 
-For now `test_reporter` is hard coded to generate Allure reports, but in future this logic should be swappable and not be bound to this repository.
+`test_reporter` uses dynamic package loading with Isolates. You can write your own reporter package and provide it to `test_reporter`. See [allure_report](packages/allure_report/) for example.
 
-## Test Reporter
+## [Test Reporter](packages/test_reporter/)
 
 ### Wrapping test command
 
-Prepend your test command with `with_reporter`
+Prepend your test command with `test_reporter`
 
 ```bash
-with_reporter dart test
+dart run test_reporter dart test
 ```
 
 You can use it with Flutter tests
 
 ```bash
-with_reporter flutter test
+dart run test_reporter flutter test
 ```
 
 You can pass arguments to dart/flutter tests as is
 
 ```bash
-with_reporter flutter test --tags golden --coverage
+dart run test_reporter flutter test --tags golden --coverage
 ```
 
-### Reports
+## [`allure_report` - Allure Report Adapter](packages/allure_report/)
+
+### Usage
+
+1. Add `allure_report` and `test_reporter` to your dependencies.
+
+```yaml
+dev_dependencies:
+  # reporter
+  allure_report: ^1.0.0
+  test_reporter: ^1.0.0
+```
+
+
+2. Run test_reporter command with your tests
+
+```bash
+dart run test_reporter --reporter allure_report -- dart test
+```
+
+
+    - Also you can create `reporter.dart` in project `test` folder with next content
+
+    ```dart
+    import 'package:allure_report/allure_report.dart';
+    import 'package:test_reporter/test_reporter.dart';
+
+    TestReporter main(List<String> args) {
+        return AllureReporter();
+    }
+    ```
+
+### Output
 
 Allure results are placed in `allure-results` folder in project root folder.
-
 
 > [!WARNING]
 > Full Allure format is not supported. Not all features are available at the moment.
 > 
 > Full spec support is needs further development
 
-## Allure Server CLI
+## [Allure Server CLI](packages/allure_server_cli/)
 
 `allures` is meant to be used to upload reports to OSS [Allure Server](https://github.com/kochetkov-ma/allure-server)
 
@@ -83,8 +114,6 @@ allures --help
 ```
 
 ## Disclaimer
-
-
 
 > [!WARNING]
 > It is hobby-time project created for research of possibility to integrate Dart tests with Allure Reporting Framework. 

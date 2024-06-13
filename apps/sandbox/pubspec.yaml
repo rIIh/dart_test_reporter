@@ -24,6 +24,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+  # reporter
+  allure_report: 
+  test_reporter: ^1.0.0
+  
+  # other
   path: ^1.9.0
   alchemist: ^0.7.0
   build_runner: ^2.4.10
