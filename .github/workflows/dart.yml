@@ -38,7 +38,6 @@ jobs:
 
       - name: Install
         run: |
-          melos reporter:install
           melos allures:install
 
       - name: Generate
