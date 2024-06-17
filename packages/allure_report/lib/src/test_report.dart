@@ -10,6 +10,7 @@ class TestReport with _$TestReport {
   const factory TestReport({
     TestStartEvent? start,
     TestDoneEvent? end,
+    TestErrorEvent? error,
     @Default([]) List<String> attachments,
   }) = _TestReport;
 

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TestReport {
   TestStartEvent? get start => throw _privateConstructorUsedError;
   TestDoneEvent? get end => throw _privateConstructorUsedError;
+  TestErrorEvent? get error => throw _privateConstructorUsedError;
   List<String> get attachments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +33,10 @@ abstract class $TestReportCopyWith<$Res> {
       _$TestReportCopyWithImpl<$Res, TestReport>;
   @useResult
   $Res call(
-      {TestStartEvent? start, TestDoneEvent? end, List<String> attachments});
+      {TestStartEvent? start,
+      TestDoneEvent? end,
+      TestErrorEvent? error,
+      List<String> attachments});
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ class _$TestReportCopyWithImpl<$Res, $Val extends TestReport>
   $Res call({
     Object? start = freezed,
     Object? end = freezed,
+    Object? error = freezed,
     Object? attachments = null,
   }) {
     return _then(_value.copyWith(
@@ -61,6 +66,10 @@ class _$TestReportCopyWithImpl<$Res, $Val extends TestReport>
           ? _value.end
           : end // ignore: cast_nullable_to_non_nullable
               as TestDoneEvent?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as TestErrorEvent?,
       attachments: null == attachments
           ? _value.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
@@ -78,7 +87,10 @@ abstract class _$$TestReportImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TestStartEvent? start, TestDoneEvent? end, List<String> attachments});
+      {TestStartEvent? start,
+      TestDoneEvent? end,
+      TestErrorEvent? error,
+      List<String> attachments});
 }
 
 /// @nodoc
@@ -94,6 +106,7 @@ class __$$TestReportImplCopyWithImpl<$Res>
   $Res call({
     Object? start = freezed,
     Object? end = freezed,
+    Object? error = freezed,
     Object? attachments = null,
   }) {
     return _then(_$TestReportImpl(
@@ -105,6 +118,10 @@ class __$$TestReportImplCopyWithImpl<$Res>
           ? _value.end
           : end // ignore: cast_nullable_to_non_nullable
               as TestDoneEvent?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as TestErrorEvent?,
       attachments: null == attachments
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
@@ -117,7 +134,10 @@ class __$$TestReportImplCopyWithImpl<$Res>
 
 class _$TestReportImpl extends _TestReport {
   const _$TestReportImpl(
-      {this.start, this.end, final List<String> attachments = const []})
+      {this.start,
+      this.end,
+      this.error,
+      final List<String> attachments = const []})
       : _attachments = attachments,
         super._();
 
@@ -125,6 +145,8 @@ class _$TestReportImpl extends _TestReport {
   final TestStartEvent? start;
   @override
   final TestDoneEvent? end;
+  @override
+  final TestErrorEvent? error;
   final List<String> _attachments;
   @override
   @JsonKey()
@@ -136,7 +158,7 @@ class _$TestReportImpl extends _TestReport {
 
   @override
   String toString() {
-    return 'TestReport(start: $start, end: $end, attachments: $attachments)';
+    return 'TestReport(start: $start, end: $end, error: $error, attachments: $attachments)';
   }
 
   @override
@@ -146,12 +168,13 @@ class _$TestReportImpl extends _TestReport {
             other is _$TestReportImpl &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
+            (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._attachments, _attachments));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, start, end,
+  int get hashCode => Object.hash(runtimeType, start, end, error,
       const DeepCollectionEquality().hash(_attachments));
 
   @JsonKey(ignore: true)
@@ -165,6 +188,7 @@ abstract class _TestReport extends TestReport {
   const factory _TestReport(
       {final TestStartEvent? start,
       final TestDoneEvent? end,
+      final TestErrorEvent? error,
       final List<String> attachments}) = _$TestReportImpl;
   const _TestReport._() : super._();
 
@@ -172,6 +196,8 @@ abstract class _TestReport extends TestReport {
   TestStartEvent? get start;
   @override
   TestDoneEvent? get end;
+  @override
+  TestErrorEvent? get error;
   @override
   List<String> get attachments;
   @override
