@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: test_reporter
+dependency_overrides:
+  test_reporter:
+    path: ../test_reporter
