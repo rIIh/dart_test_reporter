@@ -1,4 +1,5 @@
 import 'package:alchemist/alchemist.dart';
+import 'package:allure_report/allure_report.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:test_reporter_sandbox/components.book.dart';
@@ -13,20 +14,23 @@ void main() {
       goldenTest(
         'Component: ${component.name}, Story: ${story.name}',
         fileName: '${component.name}.${story.name}',
-        builder: () => GoldenTestGroup(
-          children: [
-            ...[
-              Theme(
-                data: ThemeData.light(),
-                child: Builder(builder: story.build),
-              ),
-              Theme(
-                data: ThemeData.dark(),
-                child: Builder(builder: story.build),
-              ),
+        builder: () {
+          Allure.tag('golden');
+          return GoldenTestGroup(
+            children: [
+              ...[
+                Theme(
+                  data: ThemeData.light(),
+                  child: Builder(builder: story.build),
+                ),
+                Theme(
+                  data: ThemeData.dark(),
+                  child: Builder(builder: story.build),
+                ),
+              ],
             ],
-          ],
-        ),
+          );
+        },
       );
     }
   }

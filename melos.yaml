@@ -14,7 +14,7 @@ scripts:
   test: |
     melos exec --dir-exists test --dir-exists allure-results -- rm -rf allure-results
     melos exec --dir-exists test --dir-exists reports -- rm -rf reports
-    melos exec --dir-exists test --depends-on allure_report -- dart run test_reporter --reporter allure_report -- flutter test
+    melos exec --dir-exists test --depends-on allure_report -- dart run test_reporter -- flutter test
   
   goldens:accept: |
     melos exec --dir-exists test -- flutter test --tags golden --update-goldens
