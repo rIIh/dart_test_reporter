@@ -80,7 +80,6 @@ Future<void> main(List<String> args, SendPort sendPort) async {
     () async {
       final port = ReceivePort();
       sendPort.send(port.sendPort);
-      sendPort.send("Slave: Hello Master!");
 
       final reporter = ${customImportLine.isNotEmpty ? 'e1.$method(${hasArgs ? 'args' : ''})' : ' createReporter(args)'};
       late final StreamSubscription subscription;
@@ -89,7 +88,6 @@ Future<void> main(List<String> args, SendPort sendPort) async {
         reporter.onEvent(event);
 
         if (event is TestExitEvent) {
-          sendPort.send("Slave: exit code received");
           subscription.cancel();
           port.close();
 
