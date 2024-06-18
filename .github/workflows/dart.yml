@@ -12,7 +12,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  test_report:
     permissions:
       contents: write
 
@@ -51,6 +51,7 @@ jobs:
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
       - name: Run tests
+        continue-on-error: true
         run: melos test
 
       - name: Aggregate results
