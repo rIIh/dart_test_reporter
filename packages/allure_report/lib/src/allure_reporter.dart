@@ -25,6 +25,7 @@ class AllureReporter implements TestReporter {
   final Map<int, String> description = {};
   final Map<int, Severity> severity = {};
   final Map<int, Set<AllureLink>> links = {};
+  final Map<int, Map<String, String>> extraLabels = {};
 
   Future get completed => _completer.future;
 
@@ -93,8 +94,9 @@ class AllureReporter implements TestReporter {
         RegExp(r'^severity:([a-zA-Z]+)').firstMatch(event);
     late final descriptionMatch =
         RegExp(r'^description:.+', multiLine: true).firstMatch(event);
-
     late final linkMatch = RegExp(r'^link:(.+):(.+):(.+)').firstMatch(event);
+    late final epicFeatureStoryMatch =
+        RegExp(r'^(epic|feature|story):(.+)').firstMatch(event);
 
     if (statusDetailsMatch case RegExpMatch match) {
       status['$id:${match.group(1)}'] = true;
@@ -110,6 +112,11 @@ class AllureReporter implements TestReporter {
     } else if (linkMatch case RegExpMatch()) {
       print("Putting a link: ${AllureLink.fromEvent(event)}");
       links.putIfAbsent(id, () => {}).add(AllureLink.fromEvent(event));
+    } else if (epicFeatureStoryMatch case RegExpMatch match) {
+      final type = match.group(1)!;
+      final value = match.group(2)!;
+
+      extraLabels.putIfAbsent(id, () => {})[type] = value;
     }
 
     return false;
@@ -198,6 +205,8 @@ class AllureReporter implements TestReporter {
         {'name': 'subSuite', 'value': suiteLabels.skip(2).join(', ')},
         {'name': 'package', 'value': package},
         {'name': 'language', 'value': 'dart'},
+        for (final label in (extraLabels[test.id] ?? {}).entries)
+          {'name': label.key, 'value': label.value},
         for (final tag in (tags[test.id] ?? <String>{}))
           {'name': 'tag', 'value': tag}
       ] //
