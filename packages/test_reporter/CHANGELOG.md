@@ -1,3 +1,7 @@
+## 1.1.2
+
+- lower dart sdk version bound
+
 ## 1.1.1
 
 - Remove unneeded logs

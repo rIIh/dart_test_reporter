@@ -1,11 +1,11 @@
 name: test_reporter
 description: CLI Utility to wrap dart tests with reporter plugins
-version: 1.1.1
+version: 1.1.2
 repository: https://github.com/rIIh/dart_test_reporter
 issue_tracker: https://github.com/rIIh/dart_test_reporter/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+%5Btest_reporter%5D
 
 environment:
-  sdk: ^3.4.1
+  sdk: ^3.0.0
 
 dependencies:
   path: ^1.8.0

@@ -1,3 +1,7 @@
+## 1.0.3
+
+- lower dart sdk version bound
+
 ## 1.0.2
 
 - Fix environment parse logic

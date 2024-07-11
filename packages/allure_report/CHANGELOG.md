@@ -1,3 +1,7 @@
+## 1.1.1
+
+- lower dart sdk version bound
+
 ## 1.1.0
 
 - Add meta support
