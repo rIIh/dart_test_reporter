@@ -1,3 +1,8 @@
+## 1.2.0
+
+- **feat:** add diff comparison support
+
+
 ## 1.1.1
 
 - lower dart sdk version bound

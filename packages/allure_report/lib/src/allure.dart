@@ -23,6 +23,9 @@ abstract final class Allure {
 
   // #endregion
 
+  static void diff(String expected, String actual, String diff) =>
+      print('allure:event:diff:$expected:$actual:$diff');
+
   static void severity(Severity severity) =>
       print('allure:event:severity:${severity.name}');
 

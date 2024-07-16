@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:allure_report/src/events/diff_event.dart';
 import 'package:allure_report/src/models/allure_link.dart';
 import 'package:allure_report/src/models/severity.dart';
 import 'package:allure_report/src/test_report.dart';
+import 'package:mime/mime.dart';
 import 'package:test_reporter/test_reporter.dart';
 import 'package:universal_io/io.dart';
 import 'package:uuid/data.dart';
@@ -36,7 +38,7 @@ class AllureReporter implements TestReporter {
   }
 
   @override
-  FutureOr<void> onEvent(TestEvent event) {
+  Future<void> onEvent(TestEvent event) async {
     switch (event) {
       case TestSuiteEvent event:
         suites[event.suite.id] = event.suite;
@@ -58,6 +60,33 @@ class AllureReporter implements TestReporter {
             attachmentEvent.attachment,
           ],
         );
+
+      case TestMessageEvent event
+          when event.messageType == 'print' &&
+              DiffEvent.isEligible(event.message):
+        try {
+          final diffEvent = DiffEvent.fromMessage(event.message);
+          final expectedBytes = await File(diffEvent.expected).readAsBytes();
+          final actualBytes = await File(diffEvent.actual).readAsBytes();
+          final diffBytes = await File(diffEvent.diff).readAsBytes();
+
+          final id = Uuid().v4();
+          final allureDiff = p.join(Directory.systemTemp.path, '$id.imagediff');
+          File(allureDiff).writeAsString(jsonEncode({
+            'expected': 'data:image/png;base64,${base64.encode(expectedBytes)}',
+            'actual': 'data:image/png;base64,${base64.encode(actualBytes)}',
+            'diff': 'data:image/png;base64,${base64.encode(diffBytes)}',
+          }));
+
+          tests[event.testID] = tests[event.testID]!.copyWith(
+            attachments: [
+              ...tests[event.testID]!.attachments,
+              allureDiff,
+            ],
+          );
+        } catch (e) {
+          print("[E]: Failed to create diff: $e");
+        }
 
       case TestMessageEvent event
           when event.messageType == 'print' &&
@@ -141,6 +170,11 @@ class AllureReporter implements TestReporter {
       attachments.add({
         'name': p.basenameWithoutExtension(path),
         'source': p.basename(path),
+        'type': switch (p.basename(path)) {
+          String filename when filename.endsWith('.imagediff') =>
+            'application/vnd.allure.image.diff',
+          String filename => lookupMimeType(filename)
+        },
       });
     }
 

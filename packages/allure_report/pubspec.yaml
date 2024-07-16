@@ -1,6 +1,6 @@
 name: allure_report
 description: Allure Report Adapter. Use it with [test_reporter](https://pub.dev/packages/test_reporter) package
-version: 1.1.1
+version: 1.2.0
 repository: https://github.com/rIIh/dart_test_reporter
 issue_tracker: https://github.com/rIIh/dart_test_reporter/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+%5Ballure_report%5D
 
@@ -13,6 +13,7 @@ dependencies:
   test_reporter: ^1.0.0
   universal_io: ^2.2.2
   uuid: ^4.4.0
+  mime: ^1.0.5
 
 dev_dependencies:
   build_runner: ^2.4.11
