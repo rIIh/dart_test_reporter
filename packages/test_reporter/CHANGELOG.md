@@ -1,3 +1,7 @@
+## 1.1.3
+
+- fix test runner errors terminate test runner process
+
 ## 1.1.2
 
 - lower dart sdk version bound
