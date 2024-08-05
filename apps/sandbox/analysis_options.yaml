@@ -3,6 +3,7 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   errors:
     always_declare_return_types: warning
+    asset_directory_does_not_exist: ignore
 
 linter:
   rules:
