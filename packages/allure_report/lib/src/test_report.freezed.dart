@@ -166,15 +166,19 @@ class _$TestReportImpl extends _TestReport {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TestReportImpl &&
-            (identical(other.start, start) || other.start == start) &&
-            (identical(other.end, end) || other.end == end) &&
-            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality().equals(other.start, start) &&
+            const DeepCollectionEquality().equals(other.end, end) &&
+            const DeepCollectionEquality().equals(other.error, error) &&
             const DeepCollectionEquality()
                 .equals(other._attachments, _attachments));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, start, end, error,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(start),
+      const DeepCollectionEquality().hash(end),
+      const DeepCollectionEquality().hash(error),
       const DeepCollectionEquality().hash(_attachments));
 
   @JsonKey(ignore: true)
