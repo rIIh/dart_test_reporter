@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
+
+import 'package:ansicolor/ansicolor.dart';
 import 'package:test_reporter/src/args/arg_parser.dart';
 import 'package:test_reporter/src/model/models.dart';
 import 'package:test_reporter/src/runner/test_runner.dart';
@@ -43,6 +45,10 @@ Future<void> main(List<String> args) async {
         await Future.delayed(Duration(seconds: 2));
         exit(event.exitCode);
       }
+    },
+    onError: (err) {
+      AnsiPen pen = AnsiPen()..red(bold: false);
+      print(pen(err));
     },
   );
 }
@@ -121,7 +127,9 @@ Future<void> main(List<String> args, SendPort sendPort) async {
         sendPortCompleter.complete(message);
       }
 
-      print(message.toString());
+      if (message is! SendPort) {
+        print(message.toString());
+      }
     },
   );
 
