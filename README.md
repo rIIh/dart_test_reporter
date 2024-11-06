@@ -59,7 +59,7 @@ TestReporter create() {
 }
 ```
 
-2. Run test_reporter command with your tests
+3. Run test_reporter command with your tests
 
 ```bash
 dart run test_reporter -- dart test

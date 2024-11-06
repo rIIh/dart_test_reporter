@@ -1,3 +1,7 @@
+## 1.1.5
+
+- **docs:** add example
+
 ## 1.1.4
 
 - **docs:** update README
