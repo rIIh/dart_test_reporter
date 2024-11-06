@@ -1,3 +1,10 @@
+## 1.2.3
+
+- **chore:** tighten test_reporter dependency version
+- **chore(deps):** update mime dependency
+- **docs:** add doc comments
+- **docs:** add example
+
 ## 1.2.2
 
 - **docs:** update README
