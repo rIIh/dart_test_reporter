@@ -19,19 +19,19 @@ To workaround this problem there is `test_reporter` cli tool which wraps `dart t
 Prepend your test command with `test_reporter`
 
 ```bash
-dart run test_reporter dart test
+dart run test_reporter -- dart test
 ```
 
 You can use it with Flutter tests
 
 ```bash
-dart run test_reporter flutter test
+dart run test_reporter -- flutter test
 ```
 
 You can pass arguments to dart/flutter tests as is
 
 ```bash
-dart run test_reporter flutter test --tags golden --coverage
+dart run test_reporter -- flutter test --tags golden --coverage
 ```
 
 ## [`allure_report` - Allure Report Adapter](packages/allure_report/)
@@ -48,23 +48,26 @@ dev_dependencies:
 ```
 
 
+2. Create `reporter.dart` in `test` directory. If no file created, **Basic Console Reporter** will be used.
+
+```dart
+import 'package:allure_report/allure_report.dart';
+import 'package:test_reporter/test_reporter.dart';
+
+TestReporter create() {
+  return AllureReporter();
+}
+```
+
 2. Run test_reporter command with your tests
 
 ```bash
-dart run test_reporter --reporter allure_report -- dart test
+dart run test_reporter -- dart test
 ```
 
-
-    - Also you can create `reporter.dart` in project `test` folder with next content
-
-    ```dart
-    import 'package:allure_report/allure_report.dart';
-    import 'package:test_reporter/test_reporter.dart';
-
-    TestReporter main(List<String> args) {
-        return AllureReporter();
-    }
-    ```
+```bash
+dart run test_reporter -- flutter test
+```
 
 ### Output
 

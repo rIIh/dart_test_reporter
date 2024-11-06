@@ -72,7 +72,7 @@ class AllureReporter implements TestReporter {
 
           final id = Uuid().v4();
           final allureDiff = p.join(Directory.systemTemp.path, '$id.imagediff');
-          File(allureDiff).writeAsString(jsonEncode({
+          File(allureDiff).writeAsStringSync(jsonEncode({
             'expected': 'data:image/png;base64,${base64.encode(expectedBytes)}',
             'actual': 'data:image/png;base64,${base64.encode(actualBytes)}',
             'diff': 'data:image/png;base64,${base64.encode(diffBytes)}',

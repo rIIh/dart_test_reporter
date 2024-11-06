@@ -1,3 +1,11 @@
+## 1.2.2
+
+- **docs:** update README
+
+## 1.2.1
+
+- **fix:** wait for diff attachment written to temp folder
+
 ## 1.2.0
 
 - **feat:** add diff comparison support

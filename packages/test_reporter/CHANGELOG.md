@@ -1,3 +1,7 @@
+## 1.1.4
+
+- **docs:** update README
+
 ## 1.1.3
 
 - fix test runner errors terminate test runner process
