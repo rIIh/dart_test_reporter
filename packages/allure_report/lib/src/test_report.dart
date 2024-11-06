@@ -3,6 +3,7 @@ import 'package:test_reporter/test_reporter.dart';
 
 part 'test_report.freezed.dart';
 
+/// Temporary test reporter instance for single test to accumulate metadata.
 @freezed
 class TestReport with _$TestReport {
   const TestReport._();

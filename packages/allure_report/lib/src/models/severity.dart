@@ -1,3 +1,4 @@
+/// Allure test severity.
 enum Severity {
   trivial,
   minor,

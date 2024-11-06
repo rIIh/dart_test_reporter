@@ -1,3 +1,4 @@
+/// Link in Allure format
 class AllureLink {
   final String type;
   final String name;

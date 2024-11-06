@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:allure_report/src/allure.dart';
 import 'package:allure_report/src/events/diff_event.dart';
 import 'package:allure_report/src/models/allure_link.dart';
 import 'package:allure_report/src/models/severity.dart';
@@ -13,26 +14,48 @@ import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
 
+/// Test reporter that can generate allure report files.
 class AllureReporter implements TestReporter {
+  /// Timestamp when test started.
   final int start;
   final Completer _completer = Completer();
 
+  /// Map with running tests
   final Map<int, TestReport> tests = {};
+
+  /// Map with running groups
   final Map<int, TestGroup> groups = {};
+
+  /// Map with running suites
   final Map<int, TestSuite> suites = {};
 
+  /// Map of test statuses
+  ///
   /// Key is "$id:$type"
   final Map<String, bool> status = {};
+
+  /// Map with tags per test case
   final Map<int, Set<String>> tags = {};
+
+  /// Map with description per test case
   final Map<int, String> description = {};
+
+  /// Map with severity per test case
   final Map<int, Severity> severity = {};
+
+  /// Map with links per test case
   final Map<int, Set<AllureLink>> links = {};
+
+  /// Map with extra labels per test case
   final Map<int, Map<String, String>> extraLabels = {};
 
+  /// Future completed when all tests are completed.
   Future get completed => _completer.future;
 
+  /// Create Allure test reporter.
   AllureReporter() : start = DateTime.now().millisecondsSinceEpoch;
 
+  /// Add tag to test case
   void putTag(int id, String tag) {
     tags.putIfAbsent(id, () => {}).add(tag);
   }
@@ -115,6 +138,7 @@ class AllureReporter implements TestReporter {
     }
   }
 
+  /// Handle custom log events. See [Allure] for supported events.
   bool handleCustomEvent(String event, int id) {
     late final statusDetailsMatch =
         RegExp(r'^(known|flaky|muted)$').firstMatch(event);
@@ -151,6 +175,7 @@ class AllureReporter implements TestReporter {
     return false;
   }
 
+  /// Finalize report to allure test report file.
   Future<void> onReportCreated(TestReport report) async {
     // TODO(@melvspace): 06/12/24 define output with args
     await Directory('allure-results').create();
@@ -262,18 +287,25 @@ class AllureReporter implements TestReporter {
   }
 }
 
+/// Special event to attach files to test cases
 class AttachmentEvent {
+  /// Prefix to plain message to distinguish attachment events from other events
   static const kTag = 'event:attachment';
+
+  /// Check string message is probably [AttachmentEvent]
   static bool isEligible(String message) {
     return message.startsWith('$kTag:');
   }
 
+  /// Create attachment event from plain string message.
   AttachmentEvent.fromMessage(String message)
       : attachment = message.replaceAll('$kTag:', '');
 
+  /// Path to file.
   final String attachment;
 }
 
+/// Get path to test file.
 List<String> getPath(Test test, List<TestGroup> groups, TestSuite suite) {
   groups = groups.where((element) => element.name.isNotEmpty).toList();
 
