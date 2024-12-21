@@ -65,3 +65,8 @@ testFile.copySync(test);
 print('event:attachment:$base');
 print('event:attachment:$test');
 ```
+
+## TODO
+
+- [x] Handle Flutter errors
+- [ ] Add steps support

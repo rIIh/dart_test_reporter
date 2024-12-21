@@ -3,8 +3,6 @@ import 'dart:convert';
 
 import 'package:allure_report/src/allure.dart';
 import 'package:allure_report/src/events/diff_event.dart';
-import 'package:allure_report/src/models/allure_link.dart';
-import 'package:allure_report/src/models/severity.dart';
 import 'package:allure_report/src/test_report.dart';
 import 'package:mime/mime.dart';
 import 'package:test_reporter/test_reporter.dart';
@@ -120,13 +118,32 @@ class AllureReporter implements TestReporter {
               ):
         break;
 
+      case TestMessageEvent event:
+        handleFlutterError(event);
+
       case TestErrorEvent event:
         tests.putIfAbsent(event.testID, () => TestReport());
-        tests[event.testID] = tests[event.testID]!.copyWith(error: event);
+        if (tests[event.testID] case TestReport report) {
+          // attach error if no error was attached before.
+          if (report.error == null) {
+            tests[event.testID] = report.copyWith(error: event);
+          }
+        } else {
+          tests[event.testID] = tests[event.testID]!.copyWith(error: event);
+        }
 
       case TestDoneEvent event:
         tests.putIfAbsent(event.testID, () => TestReport());
-        tests[event.testID] = tests[event.testID]!.copyWith(end: event);
+
+        final error = tests[event.testID]!.error;
+        final status = switch (error) {
+          TestErrorEvent error when error.isFailure => TestResult.failure,
+          _ => event.result,
+        };
+
+        tests[event.testID] = tests[event.testID]!.copyWith(
+          end: event.copyWith(result: status),
+        );
 
         onReportCreated(tests[event.testID]!);
 
@@ -284,6 +301,44 @@ class AllureReporter implements TestReporter {
     // TODO(@melvspace): 06/12/24 define output with args
     File('allure-results/${json['id']}-result.json')
         .writeAsString(JsonEncoder.withIndent('  ').convert(json));
+  }
+
+  /// Flutter errors are pushed to console and require additional processing.
+  void handleFlutterError(TestMessageEvent event) {
+    if (event.message.contains('EXCEPTION CAUGHT')) {
+      final parts = event.message
+          .split('When the exception was thrown, this was the stack:');
+
+      final isTestFailure = event.message.contains('following TestFailure was');
+      final String details;
+      final String stackTrace;
+
+      if (parts.length > 1) {
+        RegExp(r'^═+╡.+╞═+$');
+        details = parts[0] //
+            .replaceAll(RegExp(r'^═+╡.+╞═+\n'), '')
+            .replaceAll(
+              'The following TestFailure was thrown running a test:\n',
+              '',
+            );
+
+        stackTrace = parts[1].replaceAll(RegExp(r'\n═+$'), '');
+      } else {
+        details = event.message;
+        stackTrace = '';
+      }
+
+      tests.putIfAbsent(event.testID, () => TestReport());
+      tests[event.testID] = tests[event.testID]!.copyWith(
+        error: TestErrorEvent(
+          testID: event.testID,
+          error: details,
+          stackTrace: stackTrace,
+          isFailure: isTestFailure,
+          time: event.time,
+        ),
+      );
+    }
   }
 }
 

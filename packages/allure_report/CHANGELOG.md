@@ -1,3 +1,7 @@
+## 1.2.4
+
+- **fix:** handle flutter errors
+
 ## 1.2.3
 
 - **chore:** tighten test_reporter dependency version
