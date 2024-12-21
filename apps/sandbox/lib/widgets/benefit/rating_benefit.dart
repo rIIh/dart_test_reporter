@@ -9,8 +9,8 @@ class RatingBenefit extends StatelessWidget {
   Widget build(BuildContext context) {
     return BenefitContainer(
       icon: const BenefitIcon(icon: Icon(Icons.alternate_email_rounded)),
-      title: '+1 балл к рейтингу',
-      subtitle: 'Будут все шансы стать фаворитом недели',
+      title: '+1 score to rating',
+      subtitle: 'Will have every chance to be the favorite of the week',
       color: Theme.of(context).colorScheme.surface,
     );
   }

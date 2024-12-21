@@ -305,11 +305,14 @@ class AllureReporter implements TestReporter {
 
   /// Flutter errors are pushed to console and require additional processing.
   void handleFlutterError(TestMessageEvent event) {
-    if (event.message.contains('EXCEPTION CAUGHT')) {
-      final parts = event.message
-          .split('When the exception was thrown, this was the stack:');
+    final message = event.message;
+    if (message.contains('EXCEPTION CAUGHT')) {
+      final parts =
+          message.split('When the exception was thrown, this was the stack:');
 
-      final isTestFailure = event.message.contains('following TestFailure was');
+      final isTestFailure = message.contains('following TestFailure was') || //
+          message.contains('Pixel test failed');
+
       final String details;
       final String stackTrace;
 
@@ -324,7 +327,7 @@ class AllureReporter implements TestReporter {
 
         stackTrace = parts[1].replaceAll(RegExp(r'\n═+$'), '');
       } else {
-        details = event.message;
+        details = message;
         stackTrace = '';
       }
 

@@ -1,3 +1,7 @@
+## 1.2.5
+
+- **fix:** handle flutter golden assertions
+
 ## 1.2.4
 
 - **fix:** handle flutter errors

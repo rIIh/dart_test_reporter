@@ -9,8 +9,8 @@ class FrostBenefit extends StatelessWidget {
   Widget build(BuildContext context) {
     return BenefitContainer(
       icon: const BenefitIcon(icon: Icon(Icons.bolt)),
-      title: 'Заморозку',
-      subtitle: 'Теперь не страшно пропустить занятие',
+      title: '+2 frost',
+      subtitle: 'Dont be afraid to skip lesson',
       color: Theme.of(context).colorScheme.surface,
     );
   }
