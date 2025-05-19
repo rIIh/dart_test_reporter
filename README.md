@@ -116,6 +116,59 @@ See help for additional usage info
 allures --help
 ```
 
+## Development
+
+This repository is a mono-repo managed with [`melos`](https://pub.dev/packages/melos). 
+Each utility (e.g. `test_reporter`, `allure_report`, `allure_server_cli`) is 
+located in the `packages/` directory and developed as an independent Dart package.
+
+### Prerequisites
+
+* Dart SDK (>=3.0)
+* Flutter SDK (for Flutter-based testing)
+* [`melos`](https://pub.dev/packages/melos) installed globally:
+
+  ```bash
+  dart pub global activate melos
+  ```
+
+### Getting Started
+
+Bootstrap the workspace after cloning or pulling changes:
+
+```bash
+melos bootstrap
+```
+
+This installs all package dependencies and links local packages.
+
+### Common Tasks
+
+* Format all code:
+
+  ```bash
+  melos format
+  ```
+
+* Analyze all packages:
+
+  ```bash
+  melos analyze
+  ```
+
+* Run tests:
+
+  ```bash
+  melos run test
+  ```
+
+* Run a script for a specific package:
+
+  ```bash
+  melos run test --scope=allure_report
+  ```
+
+
 ## Disclaimer
 
 > [!WARNING]
