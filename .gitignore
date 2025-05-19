@@ -145,3 +145,6 @@ allure-results/
 # Package specific
 **/reports/
 **/test/**/failures/
+
+# FVM Version Cache
+.fvm/
