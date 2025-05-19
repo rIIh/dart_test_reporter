@@ -137,8 +137,5 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 
-*.stories.book.dart
-*.book.dart
-
 allure-report/
 allure-results/

@@ -171,8 +171,13 @@ mixin _$TestEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this TestEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestEventCopyWith<TestEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -195,6 +200,8 @@ class _$TestEventCopyWithImpl<$Res, $Val extends TestEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -228,6 +235,8 @@ class __$$TestStartRunnerEventImplCopyWithImpl<$Res>
       $Res Function(_$TestStartRunnerEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -315,12 +324,14 @@ class _$TestStartRunnerEventImpl implements TestStartRunnerEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, protocolVersion, runnerVersion, pid, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestStartRunnerEventImplCopyWith<_$TestStartRunnerEventImpl>
@@ -503,14 +514,17 @@ abstract class TestStartRunnerEvent implements TestEvent {
 
   /// The pid of the VM process running the tests.
   int get pid;
-  @override
 
   /// {@template test_event.time}
   /// The time (in milliseconds) that has elapsed since the test runner started.
   /// {@endtemplate}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestStartRunnerEventImplCopyWith<_$TestStartRunnerEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -534,6 +548,8 @@ class __$$TestAllSuitesEventImplCopyWithImpl<$Res>
       $Res Function(_$TestAllSuitesEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -588,11 +604,13 @@ class _$TestAllSuitesEventImpl implements TestAllSuitesEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, count, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestAllSuitesEventImplCopyWith<_$TestAllSuitesEventImpl> get copyWith =>
@@ -761,12 +779,15 @@ abstract class TestAllSuitesEvent implements TestEvent {
 
   /// The total number of suites that will be loaded.
   int get count;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestAllSuitesEventImplCopyWith<_$TestAllSuitesEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -792,6 +813,8 @@ class __$$TestSuiteEventImplCopyWithImpl<$Res>
       _$TestSuiteEventImpl _value, $Res Function(_$TestSuiteEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -810,6 +833,8 @@ class __$$TestSuiteEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TestSuiteCopyWith<$Res> get suite {
@@ -854,11 +879,13 @@ class _$TestSuiteEventImpl implements TestSuiteEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, suite, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestSuiteEventImplCopyWith<_$TestSuiteEventImpl> get copyWith =>
@@ -1027,12 +1054,15 @@ abstract class TestSuiteEvent implements TestEvent {
 
   /// Metadata about the suite.
   TestSuite get suite;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestSuiteEventImplCopyWith<_$TestSuiteEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1057,6 +1087,8 @@ class __$$TestDebugEventImplCopyWithImpl<$Res>
       _$TestDebugEventImpl _value, $Res Function(_$TestDebugEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1139,12 +1171,14 @@ class _$TestDebugEventImpl implements TestDebugEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, suiteID, observatory, remoteDebugger, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestDebugEventImplCopyWith<_$TestDebugEventImpl> get copyWith =>
@@ -1323,12 +1357,15 @@ abstract class TestDebugEvent implements TestEvent {
   /// The HTTP URL for the remote debugger for this suite's host page, or `null`
   /// if no remote debugger is available for this suite.
   String? get remoteDebugger;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestDebugEventImplCopyWith<_$TestDebugEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1354,6 +1391,8 @@ class __$$TestGroupEventImplCopyWithImpl<$Res>
       _$TestGroupEventImpl _value, $Res Function(_$TestGroupEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1372,6 +1411,8 @@ class __$$TestGroupEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TestGroupCopyWith<$Res> get group {
@@ -1416,11 +1457,13 @@ class _$TestGroupEventImpl implements TestGroupEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, group, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestGroupEventImplCopyWith<_$TestGroupEventImpl> get copyWith =>
@@ -1589,12 +1632,15 @@ abstract class TestGroupEvent implements TestEvent {
 
   /// Metadata about the group.
   TestGroup get group;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestGroupEventImplCopyWith<_$TestGroupEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1620,6 +1666,8 @@ class __$$TestStartEventImplCopyWithImpl<$Res>
       _$TestStartEventImpl _value, $Res Function(_$TestStartEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1638,6 +1686,8 @@ class __$$TestStartEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TestCopyWith<$Res> get test {
@@ -1682,11 +1732,13 @@ class _$TestStartEventImpl implements TestStartEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, test, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestStartEventImplCopyWith<_$TestStartEventImpl> get copyWith =>
@@ -1855,12 +1907,15 @@ abstract class TestStartEvent implements TestEvent {
 
   /// Metadata about the test that started.
   Test get test;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestStartEventImplCopyWith<_$TestStartEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1884,6 +1939,8 @@ class __$$TestMessageEventImplCopyWithImpl<$Res>
       $Res Function(_$TestMessageEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1963,12 +2020,14 @@ class _$TestMessageEventImpl implements TestMessageEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, testID, messageType, message, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestMessageEventImplCopyWith<_$TestMessageEventImpl> get copyWith =>
@@ -2145,12 +2204,15 @@ abstract class TestMessageEvent implements TestEvent {
 
   /// The message that was printed.
   String get message;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestMessageEventImplCopyWith<_$TestMessageEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2175,6 +2237,8 @@ class __$$TestErrorEventImplCopyWithImpl<$Res>
       _$TestErrorEventImpl _value, $Res Function(_$TestErrorEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2266,12 +2330,14 @@ class _$TestErrorEventImpl implements TestErrorEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, testID, error, stackTrace, isFailure, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestErrorEventImplCopyWith<_$TestErrorEventImpl> get copyWith =>
@@ -2452,12 +2518,15 @@ abstract class TestErrorEvent implements TestEvent {
 
   /// Whether the error was a TestFailure.
   bool get isFailure;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestErrorEventImplCopyWith<_$TestErrorEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2482,6 +2551,8 @@ class __$$TestDoneEventImplCopyWithImpl<$Res>
       _$TestDoneEventImpl _value, $Res Function(_$TestDoneEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2571,12 +2642,14 @@ class _$TestDoneEventImpl implements TestDoneEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, testID, result, hidden, skipped, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestDoneEventImplCopyWith<_$TestDoneEventImpl> get copyWith =>
@@ -2756,12 +2829,15 @@ abstract class TestDoneEvent implements TestEvent {
 
   /// Whether the test (or some part of it) was skipped.
   bool get skipped;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestDoneEventImplCopyWith<_$TestDoneEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2785,6 +2861,8 @@ class __$$TestRunnerDoneEventImplCopyWithImpl<$Res>
       $Res Function(_$TestRunnerDoneEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2842,11 +2920,13 @@ class _$TestRunnerDoneEventImpl implements TestRunnerDoneEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, success, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestRunnerDoneEventImplCopyWith<_$TestRunnerDoneEventImpl> get copyWith =>
@@ -3018,12 +3098,15 @@ abstract class TestRunnerDoneEvent implements TestEvent {
   /// Will be `null` if the test runner was close before all tests completed
   /// running.
   bool? get success;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestRunnerDoneEventImplCopyWith<_$TestRunnerDoneEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3047,6 +3130,8 @@ class __$$TestExitEventImplCopyWithImpl<$Res>
       _$TestExitEventImpl _value, $Res Function(_$TestExitEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3102,11 +3187,13 @@ class _$TestExitEventImpl implements TestExitEvent {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, exitCode, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestExitEventImplCopyWith<_$TestExitEventImpl> get copyWith =>
@@ -3274,12 +3361,15 @@ abstract class TestExitEvent implements TestEvent {
 
   /// The exit code associated with the test process.
   int get exitCode;
-  @override
 
   /// {@macro test_event.time}
-  int get time;
   @override
-  @JsonKey(ignore: true)
+  int get time;
+
+  /// Create a copy of TestEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestExitEventImplCopyWith<_$TestExitEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3299,8 +3389,12 @@ mixin _$TestSuite {
   /// The path to the suite's file, or `null` if that path is unknown.
   String? get path => throw _privateConstructorUsedError;
 
+  /// Serializes this TestSuite to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TestSuite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestSuiteCopyWith<TestSuite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3323,6 +3417,8 @@ class _$TestSuiteCopyWithImpl<$Res, $Val extends TestSuite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TestSuite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3366,6 +3462,8 @@ class __$$TestSuiteImplCopyWithImpl<$Res>
       _$TestSuiteImpl _value, $Res Function(_$TestSuiteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestSuite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3427,11 +3525,13 @@ class _$TestSuiteImpl implements _TestSuite {
             (identical(other.path, path) || other.path == path));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, platform, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestSuite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestSuiteImplCopyWith<_$TestSuiteImpl> get copyWith =>
@@ -3454,20 +3554,22 @@ abstract class _TestSuite implements TestSuite {
   factory _TestSuite.fromJson(Map<String, dynamic> json) =
       _$TestSuiteImpl.fromJson;
 
-  @override
-
   /// An opaque ID for the group.
-  int get id;
   @override
+  int get id;
 
   /// The platform on which the suite is running.
-  String get platform;
   @override
+  String get platform;
 
   /// The path to the suite's file, or `null` if that path is unknown.
-  String? get path;
   @override
-  @JsonKey(ignore: true)
+  String? get path;
+
+  /// Create a copy of TestSuite
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestSuiteImplCopyWith<_$TestSuiteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3505,8 +3607,12 @@ mixin _$TestGroup {
   /// This field is deprecated and should not be used.
   TestMetadata get metadata => throw _privateConstructorUsedError;
 
+  /// Serializes this TestGroup to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TestGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestGroupCopyWith<TestGroup> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3540,6 +3646,8 @@ class _$TestGroupCopyWithImpl<$Res, $Val extends TestGroup>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TestGroup
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3593,6 +3701,8 @@ class _$TestGroupCopyWithImpl<$Res, $Val extends TestGroup>
     ) as $Val);
   }
 
+  /// Create a copy of TestGroup
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TestMetadataCopyWith<$Res> get metadata {
@@ -3633,6 +3743,8 @@ class __$$TestGroupImplCopyWithImpl<$Res>
       _$TestGroupImpl _value, $Res Function(_$TestGroupImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestGroup
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3764,12 +3876,14 @@ class _$TestGroupImpl implements _TestGroup {
                 other.metadata == metadata));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, suiteID, parentID,
       testCount, line, column, url, metadata);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestGroupImplCopyWith<_$TestGroupImpl> get copyWith =>
@@ -3798,44 +3912,46 @@ abstract class _TestGroup implements TestGroup {
   factory _TestGroup.fromJson(Map<String, dynamic> json) =
       _$TestGroupImpl.fromJson;
 
-  @override
-
   /// An opaque ID for the group.
-  int get id;
   @override
+  int get id;
 
   /// The name of the group, including prefixes from any containing groups.
-  String get name;
   @override
+  String get name;
 
   /// The ID of the suite containing this group.
-  int get suiteID;
   @override
+  int get suiteID;
 
   /// The ID of the group's parent group, unless it's the root group.
-  int? get parentID;
   @override
+  int? get parentID;
 
   /// The number of tests (recursively) within this group.
-  int get testCount;
   @override
+  int get testCount;
 
   /// The (1-based) line on which the group was defined, or `null`.
-  int? get line;
   @override
+  int? get line;
 
   /// The (1-based) column on which the group was defined, or `null`.
-  int? get column;
   @override
+  int? get column;
 
   /// The URL for the file in which the group was defined, or `null`.
-  String? get url;
   @override
+  String? get url;
 
   /// This field is deprecated and should not be used.
-  TestMetadata get metadata;
   @override
-  @JsonKey(ignore: true)
+  TestMetadata get metadata;
+
+  /// Create a copy of TestGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestGroupImplCopyWith<_$TestGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3852,8 +3968,12 @@ mixin _$TestMetadata {
   /// The reason the tests was skipped, or `null` if it wasn't skipped.
   String? get skipReason => throw _privateConstructorUsedError;
 
+  /// Serializes this TestMetadata to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TestMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestMetadataCopyWith<TestMetadata> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3877,6 +3997,8 @@ class _$TestMetadataCopyWithImpl<$Res, $Val extends TestMetadata>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TestMetadata
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3915,6 +4037,8 @@ class __$$TestMetadataImplCopyWithImpl<$Res>
       _$TestMetadataImpl _value, $Res Function(_$TestMetadataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestMetadata
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3965,11 +4089,13 @@ class _$TestMetadataImpl implements _TestMetadata {
                 other.skipReason == skipReason));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, skip, skipReason);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestMetadataImplCopyWith<_$TestMetadataImpl> get copyWith =>
@@ -3991,16 +4117,18 @@ abstract class _TestMetadata implements TestMetadata {
   factory _TestMetadata.fromJson(Map<String, dynamic> json) =
       _$TestMetadataImpl.fromJson;
 
-  @override
-
   /// Whether the test was skipped.
-  bool get skip;
   @override
+  bool get skip;
 
   /// The reason the tests was skipped, or `null` if it wasn't skipped.
-  String? get skipReason;
   @override
-  @JsonKey(ignore: true)
+  String? get skipReason;
+
+  /// Create a copy of TestMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestMetadataImplCopyWith<_$TestMetadataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4053,8 +4181,12 @@ mixin _$Test {
   /// This field is deprecated and should not be used.
   TestMetadata get metadata => throw _privateConstructorUsedError;
 
+  /// Serializes this Test to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestCopyWith<Test> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -4089,6 +4221,8 @@ class _$TestCopyWithImpl<$Res, $Val extends Test>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4152,6 +4286,8 @@ class _$TestCopyWithImpl<$Res, $Val extends Test>
     ) as $Val);
   }
 
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TestMetadataCopyWith<$Res> get metadata {
@@ -4192,6 +4328,8 @@ class __$$TestImplCopyWithImpl<$Res>
   __$$TestImplCopyWithImpl(_$TestImpl _value, $Res Function(_$TestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4363,7 +4501,7 @@ class _$TestImpl implements _Test {
                 other.metadata == metadata));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -4379,7 +4517,9 @@ class _$TestImpl implements _Test {
       rootUrl,
       metadata);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestImplCopyWith<_$TestImpl> get copyWith =>
@@ -4409,61 +4549,63 @@ abstract class _Test implements Test {
 
   factory _Test.fromJson(Map<String, dynamic> json) = _$TestImpl.fromJson;
 
-  @override
-
   /// An opaque ID for the test.
-  int get id;
   @override
+  int get id;
 
   /// The name of the test, including prefixes from any containing groups.
-  String get name;
   @override
+  String get name;
 
   /// The ID of the suite containing this test.
-  int get suiteID;
   @override
+  int get suiteID;
 
   /// The IDs of groups containing this test, in order from outermost to
   /// innermost.
-  List<int> get groupIDs;
   @override
+  List<int> get groupIDs;
 
   /// The (1-based) line on which the test was defined, or `null`.
-  int? get line;
   @override
+  int? get line;
 
   /// The (1-based) column on which the test was defined, or `null`.
-  int? get column;
   @override
+  int? get column;
 
   /// The URL for the file in which the test was defined, or `null`.
-  String? get url;
   @override
+  String? get url;
 
   /// The (1-based) line in the original test suite from which the test
   /// originated.
   ///
   /// Will only be present if `root_url` is different from `url`.
-  int? get rootLine;
   @override
+  int? get rootLine;
 
   /// The (1-based) line on in the original test suite from which the test
   /// originated.
   ///
   /// Will only be present if `root_url` is different from `url`.
-  int? get rootColumn;
   @override
+  int? get rootColumn;
 
   /// The URL for the original test suite in which the test was defined.
   ///
   /// Will only be present if different from `url`.
-  String? get rootUrl;
   @override
+  String? get rootUrl;
 
   /// This field is deprecated and should not be used.
-  TestMetadata get metadata;
   @override
-  @JsonKey(ignore: true)
+  TestMetadata get metadata;
+
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestImplCopyWith<_$TestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

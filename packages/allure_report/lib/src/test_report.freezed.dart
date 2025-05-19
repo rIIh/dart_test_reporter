@@ -21,7 +21,9 @@ mixin _$TestReport {
   TestErrorEvent? get error => throw _privateConstructorUsedError;
   List<String> get attachments => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestReport
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestReportCopyWith<TestReport> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$TestReportCopyWithImpl<$Res, $Val extends TestReport>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TestReport
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class __$$TestReportImplCopyWithImpl<$Res>
       _$TestReportImpl _value, $Res Function(_$TestReportImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TestReport
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,22 +172,20 @@ class _$TestReportImpl extends _TestReport {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TestReportImpl &&
-            const DeepCollectionEquality().equals(other.start, start) &&
-            const DeepCollectionEquality().equals(other.end, end) &&
-            const DeepCollectionEquality().equals(other.error, error) &&
+            (identical(other.start, start) || other.start == start) &&
+            (identical(other.end, end) || other.end == end) &&
+            (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._attachments, _attachments));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(start),
-      const DeepCollectionEquality().hash(end),
-      const DeepCollectionEquality().hash(error),
+  int get hashCode => Object.hash(runtimeType, start, end, error,
       const DeepCollectionEquality().hash(_attachments));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestReport
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestReportImplCopyWith<_$TestReportImpl> get copyWith =>
@@ -204,8 +208,11 @@ abstract class _TestReport extends TestReport {
   TestErrorEvent? get error;
   @override
   List<String> get attachments;
+
+  /// Create a copy of TestReport
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestReportImplCopyWith<_$TestReportImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
