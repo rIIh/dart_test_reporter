@@ -52,36 +52,6 @@ Stream<TestEvent> dartTest({
 ///   flutterTest().listen(print);
 /// }
 /// ```
-///
-///get flutter path
-/// by talel briki 15/05/2025
-Future<String?> getActiveFlutterPath() async {
-  try {
-    final result = await Process.run(
-      Platform.isWindows ? 'flutter.bat' : 'flutter',
-      ['--version', '--machine'],
-    );
-
-
-    if (result.exitCode == 0) {
-      final output = result.stdout as String;
-      final jsonMap = jsonDecode(output);
-
-      final flutterRoot = jsonMap['flutterRoot'];
-
-      if (flutterRoot != null) {
-        final flutterPath = Platform.isWindows
-            ? '$flutterRoot\\bin\\flutter.bat'
-            : '$flutterRoot/bin/flutter';
-        return flutterPath;
-      }
-    }
-  } catch (e) {
-    print('Failed to detect Flutter path: $e');
-  }
-
-  return null;
-}
 Stream<TestEvent> flutterTest({
   List<String>? arguments,
   String? workingDirectory,
@@ -89,12 +59,13 @@ Stream<TestEvent> flutterTest({
   bool runInShell = false,
   StartProcess startProcess = Process.start,
 }) async*{
+  ///should extract flutter path to use it to run command
   final flutterPath = await getActiveFlutterPath();
   if (flutterPath == null) {
     throw Exception('Flutter executable not found in PATH.');
   }
   yield* _runTestProcess(
-    () => startProcess(
+        () => startProcess(
       flutterPath,
       ['test', ...?arguments, '--reporter=json'],
       environment: environment,
@@ -177,4 +148,34 @@ extension on Stream<List<int>> {
       return const {};
     }
   }
+}
+
+///get flutter path
+/// by talel briki 15/05/2025
+Future<String?> getActiveFlutterPath() async {
+  try {
+    final result = await Process.run(
+      Platform.isWindows ? 'flutter.bat' : 'flutter',
+      ['--version', '--machine'],
+    );
+
+
+    if (result.exitCode == 0) {
+      final output = result.stdout as String;
+      final jsonMap = jsonDecode(output);
+
+      final flutterRoot = jsonMap['flutterRoot'];
+
+      if (flutterRoot != null) {
+        final flutterPath = Platform.isWindows
+            ? '$flutterRoot\\bin\\flutter.bat'
+            : '$flutterRoot/bin/flutter';
+        return flutterPath;
+      }
+    }
+  } catch (e) {
+    print('Failed to detect Flutter path: $e');
+  }
+
+  return null;
 }
