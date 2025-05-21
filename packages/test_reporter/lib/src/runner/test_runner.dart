@@ -58,10 +58,15 @@ Stream<TestEvent> flutterTest({
   Map<String, String>? environment,
   bool runInShell = false,
   StartProcess startProcess = Process.start,
-}) {
-  return _runTestProcess(
-    () => startProcess(
-      'flutter',
+}) async*{
+  ///extract flutter path to run command
+  final flutterPath = await getActiveFlutterPath();
+  if (flutterPath == null) {
+    throw Exception('Flutter executable not found in PATH.');
+  }
+  yield* _runTestProcess(
+        () => startProcess(
+      flutterPath,
       ['test', ...?arguments, '--reporter=json'],
       environment: environment,
       workingDirectory: workingDirectory,
@@ -144,3 +149,33 @@ extension on Stream<List<int>> {
     }
   }
 }
+///get flutter path
+/// by talel briki 15/05/2025
+Future<String?> getActiveFlutterPath() async {
+  try {
+    final result = await Process.run(
+      Platform.isWindows ? 'flutter.bat' : 'flutter',
+      ['--version', '--machine'],
+    );
+
+
+    if (result.exitCode == 0) {
+      final output = result.stdout as String;
+      final jsonMap = jsonDecode(output);
+
+      final flutterRoot = jsonMap['flutterRoot'];
+
+      if (flutterRoot != null) {
+        final flutterPath = Platform.isWindows
+            ? '$flutterRoot\\bin\\flutter.bat'
+            : '$flutterRoot/bin/flutter';
+        return flutterPath;
+      }
+    }
+  } catch (e) {
+    print('Failed to detect Flutter path: $e');
+  }
+
+  return null;
+}
+
