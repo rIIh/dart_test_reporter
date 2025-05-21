@@ -27,9 +27,7 @@ Future<void> main(List<String> args) async {
       .toList();
 
   final Stream<TestEvent> events;
-
   switch (command.first) {
-
     case 'flutter':
       events = flutterTest(arguments: testArgs);
 
@@ -40,7 +38,7 @@ Future<void> main(List<String> args) async {
   final (_, reporterPort) = await createReporter(reporter, args);
 
   events.listen(
-        (event) async {
+    (event) async {
       reporterPort.send(jsonEncode(event.toJson()));
       if (event is TestExitEvent) {
         // TODO(@melvspace): 06/13/24 exit when isolate done its work
@@ -55,44 +53,22 @@ Future<void> main(List<String> args) async {
   );
 }
 
-/// This creates a relative path from `from` to `input`, the output being a
-/// posix path on all platforms.
-/// by talel briki 15/05/2025
-String _posixRelative(String input, {String from = ""}) {
-  // Use the appropriate context for Windows
-  final p.Context context = p.Context(style: p.Style.windows);
-
-  // Ensure the input and "from" paths are absolute
-  final String absInputPath = File(input).absolute.path;
-  final String absFromPath = Directory(from).absolute.path;
-
-  // Print the resolved absolute paths
-
-  // Compute the relative path
-  final String relativePath = context.relative(absInputPath, from: absFromPath);
-
-  return relativePath;
-}
-
-
 // TODO(@melvspace): 06/12/24 handle errors
 Future<(Isolate, SendPort)> createReporter(
-    String? reporter,
-    List<String> args,
-    ) async {
+  String? reporter,
+  List<String> args,
+) async {
   final Directory tempDir = Directory.systemTemp.createTempSync();
-
 
   final (customImportLine, method, hasArgs) =
       await getCustomReporterImport(as: 'e1',path:tempDir.path) ?? ('', '', false);
-
   final importLine = customImportLine.isEmpty
       ? switch (reporter) {
-    String package when package.contains('/') =>
-    "import 'package:$package.dart';",
-    String package => "import 'package:$package/$package.dart';",
-    _ => "import 'package:test_reporter/basic_reporter.dart';"
-  }
+          String package when package.contains('/') =>
+            "import 'package:$package.dart';",
+          String package => "import 'package:$package/$package.dart';",
+          _ => "import 'package:test_reporter/basic_reporter.dart';"
+        }
       : "";
 
   final code = '''
@@ -134,16 +110,9 @@ Future<void> main(List<String> args, SendPort sendPort) async {
 }
 ''';
 
-
-  // Convert relative path to absolute for file creation
-  //var path = r"C:\Users\Hamza JOUINI\Tempfiles"; // Use raw string for Windows path
-  //String absoluteFilePath = File(p.join(path, '_reporter_temp_.dart')).absolute.path;
   String absoluteFilePath = File(p.join(tempDir.path, '_reporter_temp_.dart')).absolute.path;
-
-  // Ensure the parent directory exists
+  /// Ensure the parent directory exists
   Directory(p.dirname(absoluteFilePath)).createSync(recursive: true);
-
-  // Create the file
   final File tempFile = File(absoluteFilePath);
   await tempFile.writeAsString(code);
 
@@ -156,7 +125,7 @@ Future<void> main(List<String> args, SendPort sendPort) async {
   );
 
   receivePort.listen(
-        (message) {
+    (message) {
       if (message is SendPort && !sendPortCompleter.isCompleted) {
         sendPortCompleter.complete(message);
       }
@@ -170,17 +139,15 @@ Future<void> main(List<String> args, SendPort sendPort) async {
   return (await isolate, await sendPortCompleter.future);
 }
 
-
-
-Future<(String, String, bool)?> getCustomReporterImport({String as = '',String path=''}) async {
+Future<(String, String, bool)?> getCustomReporterImport(
+    {String as = '',String path=''}) async {
   final customReporter = File(p.join('test', 'reporter.dart'));
-
+  ///get relative path from temporary file to reporter.dart file
   String relativePath = _posixRelative(customReporter.absolute.path, from:path);
-  // Get the absolute path and replace '\' with '\\'
+  /// Get the absolute path and replace '\' with '\\'
   final sanitizedPath = relativePath.replaceAll(r'\', r'\\');
   final customReporterImportLine =
-      "import '$sanitizedPath'${as.isNotEmpty ? ' as $as' : ''};";
-
+      "import '$sanitizedPath'${as.isNotEmpty ? 'as $as' : ''};";
 
   if (!await customReporter.exists()) return null;
 
@@ -200,3 +167,21 @@ Future<(String, String, bool)?> getCustomReporterImport({String as = '',String p
   return null;
 }
 
+/// This creates a relative path from `from` to `input`, the output being a
+/// posix path on all platforms.
+/// by talel briki 15/05/2025
+String _posixRelative(String input, {String from = ""}) {
+  // Use the appropriate context for Windows
+  final p.Context context = p.Context(style: p.Style.windows);
+
+  // Ensure the input and "from" paths are absolute
+  final String absInputPath = File(input).absolute.path;
+  final String absFromPath = Directory(from).absolute.path;
+
+  // Print the resolved absolute paths
+
+  // Compute the relative path
+  final String relativePath = context.relative(absInputPath, from: absFromPath);
+
+  return relativePath;
+}
