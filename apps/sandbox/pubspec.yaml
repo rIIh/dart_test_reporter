@@ -26,13 +26,13 @@ dev_dependencies:
 
 
   # reporter
-  allure_report: ^1.0.0
+  allure_report: ^1.2.5
   test_reporter: ^1.0.0
   alchemist_test_reporter: ^1.0.0
   
   # other
   path: ^1.9.0
-  alchemist: ^0.7.0
+  alchemist: ^0.12.0
   build_runner: ^2.4.10
   flutter_lints: ^3.0.0
   widgetbook_generator:
