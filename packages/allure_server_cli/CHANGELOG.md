@@ -1,3 +1,9 @@
+## 1.1.0
+
+ - **REFACTOR**: remove redundant comments.
+ - **FIX**: fix environment invalid logic.
+ - **FEAT**(allures): add header and basic auth support.
+
 ## 1.0.3
 
 - lower dart sdk version bound

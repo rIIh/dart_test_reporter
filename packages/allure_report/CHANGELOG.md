@@ -1,3 +1,15 @@
+## 1.3.0
+
+ - **REFACTOR**: remove redundant comments.
+ - **FIX**(allure): handle flutter golden assertions.
+ - **FIX**: handle flutter errors.
+ - **FEAT**: add allure diff support.
+ - **FEAT**(allure): add epic/feature/story support.
+ - **FEAT**(allure): add meta helpers.
+ - **FEAT**(test_reporter): extract hard coded reporter in its own package.
+ - **DOCS**: add example.
+ - **DOCS**: add doc comments.
+
 ## 1.2.5
 
 - **fix:** handle flutter golden assertions

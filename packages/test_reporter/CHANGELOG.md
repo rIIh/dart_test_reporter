@@ -1,3 +1,11 @@
+## 1.2.0
+
+ - **FIX**(windows): fix test_reporter running on Windows (#8).
+ - **FIX**(test_reporter): add onError callback to event listener.
+ - **FEAT**(test_reporter): extract hard coded reporter in its own package.
+ - **DOCS**: add docs and example.
+ - **DOCS**(test_reporter): document test_reporter.
+
 ## 1.1.5
 
 - **docs:** add example
