@@ -58,14 +58,14 @@ Stream<TestEvent> flutterTest({
   Map<String, String>? environment,
   bool runInShell = false,
   StartProcess startProcess = Process.start,
-}) async*{
+}) async* {
   ///extract flutter path to run command
   final flutterPath = await getActiveFlutterPath();
   if (flutterPath == null) {
     throw Exception('Flutter executable not found in PATH.');
   }
   yield* _runTestProcess(
-        () => startProcess(
+    () => startProcess(
       flutterPath,
       ['test', ...?arguments, '--reporter=json'],
       environment: environment,
@@ -126,6 +126,13 @@ Stream<TestEvent> _runTestProcess(
 }
 
 extension on Stream<List<int>> {
+  /// Converts a stream of bytes to a stream of [TestEvent] instances.
+  ///
+  /// Decodes the input stream as UTF-8, splits the content into lines,
+  /// attempts to parse each line as JSON, filters out empty entries,
+  /// and transforms the JSON into [TestEvent] objects.
+  ///
+  /// Returns a stream of parsed [TestEvent] instances.
   Stream<TestEvent> mapToTestEvents() {
     return map(utf8.decode)
         .expand<String>(_splitLines)
@@ -149,7 +156,16 @@ extension on Stream<List<int>> {
     }
   }
 }
-///get flutter path
+
+/// Attempts to retrieve the active Flutter SDK installation path.
+///
+/// Runs the Flutter version command to detect the Flutter root directory.
+/// Returns the full path to the Flutter executable, or `null` if detection fails.
+///
+/// On Windows, uses 'flutter.bat', on other platforms uses 'flutter' command.
+///
+/// Handles potential errors during path detection and returns `null` if unsuccessful.
+///
 /// by talel briki 15/05/2025
 Future<String?> getActiveFlutterPath() async {
   try {
@@ -157,7 +173,6 @@ Future<String?> getActiveFlutterPath() async {
       Platform.isWindows ? 'flutter.bat' : 'flutter',
       ['--version', '--machine'],
     );
-
 
     if (result.exitCode == 0) {
       final output = result.stdout as String;
@@ -178,4 +193,3 @@ Future<String?> getActiveFlutterPath() async {
 
   return null;
 }
-

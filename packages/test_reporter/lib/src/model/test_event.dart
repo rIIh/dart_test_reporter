@@ -9,7 +9,7 @@ part 'test_event.g.dart';
 /// will be subclasses of [TestEvent].
 /// https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md
 @Freezed(unionKey: 'type')
-class TestEvent with _$TestEvent {
+sealed class TestEvent with _$TestEvent {
   /// A single start event is emitted before any other events.
   /// It indicates that the test runner has started running.
   const factory TestEvent.start({

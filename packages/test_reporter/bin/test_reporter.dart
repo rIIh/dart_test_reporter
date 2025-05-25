@@ -61,7 +61,9 @@ Future<(Isolate, SendPort)> createReporter(
   final Directory tempDir = Directory.systemTemp.createTempSync();
 
   final (customImportLine, method, hasArgs) =
-      await getCustomReporterImport(as: 'e1',path:tempDir.path) ?? ('', '', false);
+      await getCustomReporterImport(as: 'e1', path: tempDir.path) ??
+          ('', '', false);
+
   final importLine = customImportLine.isEmpty
       ? switch (reporter) {
           String package when package.contains('/') =>
@@ -109,7 +111,11 @@ Future<void> main(List<String> args, SendPort sendPort) async {
   );
 }
 ''';
-  String absoluteFilePath = File(p.join(tempDir.path, '_reporter_temp_.dart')).absolute.path;
+
+  String absoluteFilePath = File(
+    p.join(tempDir.path, '_reporter_temp_.dart'),
+  ).absolute.path;
+
   /// Ensure the parent directory exists
   Directory(p.dirname(absoluteFilePath)).createSync(recursive: true);
   final File tempFile = File(absoluteFilePath);
@@ -138,10 +144,16 @@ Future<void> main(List<String> args, SendPort sendPort) async {
   return (await isolate, await sendPortCompleter.future);
 }
 
-Future<(String, String, bool)?> getCustomReporterImport(
-    {String as = '',String path=''}) async {
+Future<(String, String, bool)?> getCustomReporterImport({
+  String as = '',
+  String path = '',
+}) async {
   final customReporter = File(p.join('test', 'reporter.dart'));
-  String relativePath = _posixRelative(customReporter.absolute.path, from:path);
+  String relativePath = _posixRelative(
+    customReporter.absolute.path,
+    from: path,
+  );
+
   /// Get the absolute path and replace '\' with '\\'
   final sanitizedPath = relativePath.replaceAll(r'\', r'\\');
   final customReporterImportLine =
@@ -164,8 +176,10 @@ Future<(String, String, bool)?> getCustomReporterImport(
 
   return null;
 }
+
 /// This creates a relative path from `from` to `input`, the output being a
 /// posix path on all platforms.
+///
 /// by talel briki 15/05/2025
 String _posixRelative(String input, {String from = ""}) {
   // Use the appropriate context for Windows
@@ -182,4 +196,3 @@ String _posixRelative(String input, {String from = ""}) {
 
   return relativePath;
 }
-
